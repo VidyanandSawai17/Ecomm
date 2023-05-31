@@ -1,0 +1,53 @@
+﻿@using Ecomm.Models;
+
+@model List<Product>
+
+@{
+    ViewData["Title"] = "Home";
+}
+
+<div class="input-group mb-3">
+    <input type="text" name="search" class="form-control" placeholder="Search for products...">
+    <button type="submit" class="btn btn-outline-secondary">Search</button>
+</div>
+@if (!string.IsNullOrEmpty(ViewBag.SearchTerm))
+{
+    <div class="alert alert-info">
+        Showing results for <strong>@ViewBag.SearchTerm</strong>
+    </div>
+}
+
+
+
+
+<div class="row">
+    <div class="col-md-3">
+        <h4>Categories</h4>
+        <ul class="list-group">
+            @foreach (var category in ViewBag.Categories)
+            {
+                <li class="list-group-item"><a href="@Url.Action("Index", "Home", new { category = category.Catname })">@category.Catname</a></li>
+            }
+        </ul>
+    </div>
+    <div class="col-md-9">
+        <div class="row">
+            @foreach (var product in Model)
+            {
+                <div class="col-sm-6 col-md-4">
+                    <div class="thumbnail">
+                        <img src="@Url.Content(product.Img)" alt="@product.Img" class="img-responsive" />
+                        <div class="caption">
+                            <h4>@product.Name</h4>
+                            <p>@product.Description</p>
+                            <p>
+                                <a href="@Url.Action("Details", "Product", new { id = product.Id })" class="btn btn-primary" role="button">Details</a>
+                                <a href="@Url.Action("AddToCart", "Cart", new { id = product.Id })" class="btn btn-success" role="button">Add to Cart</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

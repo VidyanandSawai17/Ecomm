@@ -1,0 +1,24 @@
+﻿@model Ecomm.Models.Category
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Category</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Catname)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Catname)
+        </dd>
+    </dl>
+</div>
+<div>
+    @Html.ActionLink("Edit", "Edit", new {  id = Model.Catid  }) |
+    <a asp-action="Index">Back to List</a>
+</div>
